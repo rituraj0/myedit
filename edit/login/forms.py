@@ -29,4 +29,4 @@ class Postnotepad(forms.ModelForm):
     
       class Meta:
           model = notepad
-          fields = ('content','filename',)
+          fields = ('content',)
