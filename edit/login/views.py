@@ -75,3 +75,6 @@ def create_new(request):
             #return redirect('blog.views.post_detail', pk=post.pk)
     form = Postnotepad();
     return render(request, 'registration/create_new.html' ,{'form': form} )
+
+def edit_code(request,file_name):
+    return HttpResponse("hello"+str(file_name))
