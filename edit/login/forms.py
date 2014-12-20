@@ -3,6 +3,7 @@ import re
 from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from .models import notepad
  
 class RegistrationForm(forms.Form):
  
@@ -23,3 +24,9 @@ class RegistrationForm(forms.Form):
             if self.cleaned_data['password1'] != self.cleaned_data['password2']:
                 raise forms.ValidationError(_("The two password fields did not match."))
         return self.cleaned_data
+
+class Postnotepad(forms.Form):
+
+      class Meta:
+          model = notepad;
+          fields = ('content');
