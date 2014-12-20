@@ -15,5 +15,5 @@ class notepad(models.Model):
     created  = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.filename;
+        return str( str(self.filename)+ " "+str(self.content));
 

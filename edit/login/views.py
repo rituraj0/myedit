@@ -11,7 +11,10 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render
 from django.http import HttpResponse
+from datetime import datetime
+import calendar
 import uuid
+
 
 @csrf_protect
 def register(request):
@@ -66,15 +69,10 @@ def creates(request):
     return HttpResponse(uuid.uuid1())
 
 def create_new(request):
-    if request.method == "POST":
-        form = Postnotepad(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            #post.author = request.user
-            post.save()
-            #return redirect('blog.views.post_detail', pk=post.pk)
-    form = Postnotepad();
-    return render(request, 'registration/create_new.html' ,{'form': form} )
+    guid = uuid.uuid1();
+    to_url=str("http://127.0.0.1:8000/edit/"+str(guid)+"/");
+    return HttpResponseRedirect(to_url);
+    
 
 def edit_code(request,file_name):
     return HttpResponse("hello"+str(file_name))
