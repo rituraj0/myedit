@@ -64,3 +64,7 @@ def search(request):
 
 def creates(request):
     return HttpResponse(uuid.uuid1())
+
+def create_new(request):
+    form = Postnotepad();
+    return render(request, 'registration/create_new.html')

@@ -17,6 +17,6 @@ urlpatterns = patterns('',
     url(r'^home/$', home),
     url(r'^search-form/$', search_form),
     url(r'^search/$', search),
-    url(r'^create/$', creates),                   
+    url(r'^create/$', create_new),                   
                        
 )
