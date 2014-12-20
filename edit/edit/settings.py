@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-#import django.contrib.auth
+#from django.contrib.auth import authenticate
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -40,7 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'inside',
+    'login',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -88,6 +88,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+import django.contrib.auth
+django.contrib.auth.LOGIN_URL = '/'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
