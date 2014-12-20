@@ -66,5 +66,12 @@ def creates(request):
     return HttpResponse(uuid.uuid1())
 
 def create_new(request):
+    if request.method == "POST":
+        form = Postnotepad(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            #post.author = request.user
+            post.save()
+            #return redirect('blog.views.post_detail', pk=post.pk)
     form = Postnotepad();
     return render(request, 'registration/create_new.html' ,{'form': form} )
