@@ -67,4 +67,4 @@ def creates(request):
 
 def create_new(request):
     form = Postnotepad();
-    return render(request, 'registration/create_new.html')
+    return render(request, 'registration/create_new.html' ,{'form': form} )

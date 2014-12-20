@@ -25,8 +25,8 @@ class RegistrationForm(forms.Form):
                 raise forms.ValidationError(_("The two password fields did not match."))
         return self.cleaned_data
 
-class Postnotepad(forms.Form):
-
+class Postnotepad(forms.ModelForm):
+    
       class Meta:
-          model = notepad;
-          fields = ('content');
+          model = notepad
+          fields = ('content','filename',)
