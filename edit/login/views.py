@@ -11,6 +11,7 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render
 from django.http import HttpResponse
+import uuid
 
 @csrf_protect
 def register(request):
@@ -59,3 +60,7 @@ def search(request):
     else:
         message = 'You submitted an empty form.'
     return HttpResponse(message)
+
+
+def creates(request):
+    return HttpResponse(uuid.uuid1())
