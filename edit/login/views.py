@@ -9,7 +9,9 @@ from django.views.decorators.csrf import csrf_protect
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
- 
+from django.shortcuts import render
+from django.http import HttpResponse
+
 @csrf_protect
 def register(request):
     if request.method == 'POST':
@@ -47,3 +49,13 @@ def home(request):
     'home.html',
     { 'user': request.user }
     )
+
+def search_form(request):
+    return render(request, 'registration/search_form.html')
+
+def search(request):
+    if 'q' in request.GET:
+        message = 'You searched for: %r' % request.GET['q']
+    else:
+        message = 'You submitted an empty form.'
+    return HttpResponse(message)
