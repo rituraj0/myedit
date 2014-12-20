@@ -14,6 +14,7 @@ from django.http import HttpResponse
 from datetime import datetime
 import calendar
 import uuid
+from login.models import *
 
 
 @csrf_protect
@@ -71,16 +72,13 @@ def creates(request):
 def create_new(request):
     guid = uuid.uuid1();
     to_url=str("http://127.0.0.1:8000/edit/"+str(guid)+"/");
+    #q = Question(question_text="What's new?", pub_date=timezone.now())
+    dummy=notepad( filename = guid , version=guid , author = request.user ,content="Welcome" , created= datetime.datetime.now() );
+    dummy.save();
     return HttpResponseRedirect(to_url);
     
 
 def edit_code(request,file_name):
-
-    if request.method == "GET":
-        form = Postnotepad();
-        return render(request, 'registration/create_new.html' ,{'form': form} )
-    
-    if request.method == "POST":
         form = Postnotepad(request.POST)
         if form.is_valid():
                 post = form.save(commit=False)

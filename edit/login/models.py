@@ -16,7 +16,7 @@ class notepad(models.Model):
     created  = models.DateTimeField(default=datetime.datetime.now, blank=True)
 
     def __str__(self):
-        return str( str(self.filename)+ "-"+str(self.content) + "-" + str(self.version) + "-" + str(self.created) + "-" + str(self.author) );
+        return str( str(self.filename)+ "-"+str(self.content) + "-" + str(self.version) + "-" + str(self.created) + "-" + str(self.author) +"\n\n" );
 
     class Meta:
         get_latest_by = 'created'
