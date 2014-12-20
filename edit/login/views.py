@@ -79,8 +79,17 @@ def create_new(request):
     
 
 def edit_code(request,file_name):
+        """
+        if(request.method == "POST" ):
+             return HttpResponse("post")
+        if(request.method == "GET" ):    
+            return HttpResponse("get")
+         
         form = Postnotepad(request.POST)
-        if form.is_valid():
+        """
+        if(request.method == "POST" ):
+            form = Postnotepad(request.POST)
+            if form.is_valid():
                 post = form.save(commit=False)
                 post.author = request.user
                # post.created = calendar.timegm(d.utctimetuple());
@@ -88,11 +97,8 @@ def edit_code(request,file_name):
                 post.filename = file_name;
                 post.save()
 
-        ret = notepad.objects.filter(filename = file_name).order_by('-created').latest();
 
-        form.filename = file_name;
-        form.version = ret.version;
-        form.author = ret.author;
-        form.content = ret.content;
-        form.created = ret.created;
+        ret = notepad.objects.filter(filename = file_name).order_by('-created').latest();
+        form = Postnotepad();
+        form = Postnotepad(instance=ret)
         return render(request, 'registration/create_new.html' ,{'form': form} )            
