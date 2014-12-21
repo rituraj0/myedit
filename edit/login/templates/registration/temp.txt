@@ -22,3 +22,7 @@ form = Postnotepad(request.POST)
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
 {% endblock %}
+
+'<p><label for="id_content">Content:</label> <textarea cols="40" id="id_content" name="content" rows="10">\r\n</textarea></p>'
+
+'<p><label for="id_content"></label> <textarea cols="50" id="id_content" name="content" rows="50">\r\n</textarea></p>'

@@ -30,5 +30,8 @@ class Postnotepad(forms.ModelForm):
       class Meta:
           model = notepad
           fields = ('content',)
+          widgets = {
+          'content': forms.Textarea(attrs={'rows':10, 'cols':60}),
+           }
 
           

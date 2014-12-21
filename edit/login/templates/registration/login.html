@@ -10,8 +10,9 @@
             <tr><th><label for="id_username">Username:</label></th><td>{{ form.username }}</td></tr>
             <tr><th><label for="id_password">Password:</label></th><td>{{ form.password }}</td></tr>
         </table>
-        <input type="submit" value="Login" />
+        <input type="submit" style="margin-left:8em;" value="Login" />
         <input type="hidden" name="next" value="/home" />
     </form>
-    <a href="/register">Register</a>
+	<br>
+    <a href="/register" style="margin-left:6em;">Register</a>
 {% endblock %}
