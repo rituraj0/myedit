@@ -19,6 +19,8 @@ import os
 from subprocess import call
 import subprocess
 from subprocess import Popen, PIPE, STDOUT
+import diff_match_patch
+
 
 
 @csrf_protect
@@ -73,9 +75,6 @@ def search(request):
 def creates(request):
     return HttpResponse(uuid.uuid1())
 
-def changelist(request,file_name):
-    return HttpResponse(file_name)
-
 def create_new(request):
     guid = uuid.uuid1();
     to_url=str("http://127.0.0.1:8000/edit/"+str(guid)+"/");
@@ -99,7 +98,6 @@ def edit_code(request,file_name):
             if form.is_valid():
                 post = form.save(commit=False)
                 post.author = request.user
-               # post.created = calendar.timegm(d.utctimetuple());
                 post.version = uuid.uuid1();
                 post.filename = file_name;
                 post.save()
@@ -111,31 +109,40 @@ def edit_code(request,file_name):
         source_code= ret.content;
 
         file_name= ret.version+".py";
-        #file_name.replace(r'\\\\',r'\\');
+
         file_path = os.path.join( "C:/Users/Rituraj/Documents/GitHub/myedit/files", file_name);
-        #C:\Users\Rituraj\Documents\GitHub\myedit
-        #file_path.replace('\\\\','\\');
         open_file = open( file_path,"w");
         open_file.write(str(source_code));
-        open_file.close();
-
-        #ans = subprocess.check_output( [ 'python' , file_path ] );
+        open_file.close()
 
         cmd = "python "+ file_path;
         p = Popen(cmd, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT)
         output = p.stdout.read()
 
-        #print output
-
-        #output = "compile error";
-        """
-        temp = subprocess.check_output( [ 'python' , file_path ] , stdout=subprocess.PIPE )
-        output = temp.communicate()[0]
-
-        try:
-            output= subprocess.check_output( [ 'python' , file_path ] , stdout=subprocess.PIPE );
-        except subprocess.CalledProcessError as e:
-            output = e.output;
-        """
-        
+      
         return render(request, 'registration/create_new.html' ,{'form': form , 'output':output} )            
+
+def changelist(request,file_name):
+    ret = list(notepad.objects.filter(filename = file_name).order_by('-created'));
+    ans = " <h2> Changelist  for  " + file_name  + "  " + " </h2>";
+    diff_obj = diff_match_patch.diff_match_patch()
+
+    for i in range ( 1 , len(ret) ):
+    
+        curr_user = ret[i].author;
+        curr_version = ret[i].version;
+        curr_time = ret[i].created;
+        
+        old_string= ret[i-1].content;        
+        new_string = ret[i].content;
+
+        diffs = diff_obj.diff_main(old_string, new_string)
+        diff_obj.diff_cleanupSemantic(diffs)
+        html = diff_obj.diff_prettyHtml(diffs)
+
+        curr_string = "<br><br>  <b> " + curr_version + " <b>  ";
+        curr_string = curr_string + "<br>";
+        curr_string = curr_string + html;
+
+        ans = ans + curr_string;
+    return HttpResponse( ans )
