@@ -155,6 +155,8 @@ def history(request):
 
     for i in range(0, len(ret) ):#take version  instead of filename , it makes a lot of sense
         curr_string="<br>Fileanme: &nbsp "+ret[i].filename + " &nbsp &nbsp Version: &nbsp "+ret[i].version+"&nbsp &nbsp Time: &nbsp "+ret[i].created.strftime("%d/%m/%Y %H:%M:%S");
+        link = "<a &nbsp href =" +"http://127.0.0.1:8000/version/" + ret[i].version +" > &nbsp View Here &nbsp </a>";
+        curr_string = curr_string + link;
         ans = ans + curr_string;        
 
     return HttpResponse( ans );
