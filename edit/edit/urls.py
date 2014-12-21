@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     url(r'^search/$', search),
     url(r'^create/$', create_new),
     url(r'^edit/', include('login.urls')),
-    url(r'^changelist/(?P<file_name>[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})', changelist),
+    url(r'^changelist/(?P<file_name>[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})', changelist),                       
     url(r'^history/$', history),
+    url(r'^version/(?P<file_name>[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})', version),
 )

@@ -157,4 +157,8 @@ def history(request):
         curr_string="<br>Fileanme: &nbsp "+ret[i].filename + " &nbsp &nbsp Version: &nbsp "+ret[i].version+"&nbsp &nbsp Time: &nbsp "+ret[i].created.strftime("%d/%m/%Y %H:%M:%S");
         ans = ans + curr_string;        
 
-    return HttpResponse( ans );     
+    return HttpResponse( ans );
+
+def version(request , file_name ):
+    ret = (list(notepad.objects.filter(version = file_name)))[0].content;       
+    return HttpResponse( ret );
