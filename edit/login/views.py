@@ -140,7 +140,8 @@ def changelist(request,file_name):
         diff_obj.diff_cleanupSemantic(diffs)
         html = diff_obj.diff_prettyHtml(diffs)
 
-        curr_string = "<br><br>  <b> " + curr_version + " <b>  ";
+        curr_string = "<br><br>  <b> " + " Delta &nbsp " +curr_version + " </b>  ";
+        curr_string = curr_string + "  &nbsp  User " + curr_user + " &nbsp Time  " + curr_time.strftime("%d/%m/%Y %H:%M:%S") ;
         curr_string = curr_string + "<br>";
         curr_string = curr_string + html;
 
