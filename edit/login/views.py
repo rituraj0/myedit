@@ -146,4 +146,15 @@ def changelist(request,file_name):
         curr_string = curr_string + html;
 
         ans = ans + curr_string;
-    return HttpResponse( ans )
+    return HttpResponse( ans );
+
+def history(request):
+    curr_user = request.user;
+    ret = list(notepad.objects.filter(author = curr_user).order_by('-created'));
+    ans = " <h2> History for &nbsp " + str(curr_user)  + "&nbsp" + " </h2>";
+
+    for i in range(0, len(ret) ):#take version  instead of filename , it makes a lot of sense
+        curr_string="<br>Fileanme: &nbsp "+ret[i].filename + " &nbsp &nbsp Version: &nbsp "+ret[i].version+"&nbsp &nbsp Time: &nbsp "+ret[i].created.strftime("%d/%m/%Y %H:%M:%S");
+        ans = ans + curr_string;        
+
+    return HttpResponse( ans );     
