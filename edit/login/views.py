@@ -108,7 +108,7 @@ def edit_code(request,file_name):
 
         file_name= ret.version+".py";
         #file_name.replace(r'\\\\',r'\\');
-        file_path = os.path.join( "C:/Users/Rituraj/Documents/GitHub/myedit", file_name);
+        file_path = os.path.join( "C:/Users/Rituraj/Documents/GitHub/myedit/files", file_name);
         #C:\Users\Rituraj\Documents\GitHub\myedit
         #file_path.replace('\\\\','\\');
         open_file = open( file_path,"w");
@@ -117,5 +117,6 @@ def edit_code(request,file_name):
 
         #ans = subprocess.check_output( [ 'python' , file_path ] );
 
-        output= file_path;
+        output= subprocess.check_output( [ 'python' , file_path ] );
+        
         return render(request, 'registration/create_new.html' ,{'form': form , 'output':output} )            
