@@ -1,8 +1,26 @@
-{% extends 'baap.html' %}
-{% block content %}
-    <h4>New kuchh</h4>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
-    </form>
-{% endblock %}
+<html>
+<head>
+  <title>Write Here </title>
+  <meta http-equiv="refresh" content="10";URL='http://thetudors.example.com/'" />  
+</head>
+<body>
+    <div class="page-header">
+        <h1><a href="/">My post </a></h1>
+    </div>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+             <h4>Hello Here </h4>
+               <form method="POST" class="post-form">{% csrf_token %}
+                 {{ form.as_p }}
+                <button type="submit" class="save btn btn-default">Save</button>
+               </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+

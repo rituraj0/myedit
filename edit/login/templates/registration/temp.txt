@@ -1,0 +1,24 @@
+form = Postnotepad(request.POST)
+       if form.is_valid():
+         post = form.save(commit=False)
+           #post.author = request.user
+          post.save()
+		  
+		  
+		  
+		  799b1446-8874-11e4-b642-d2944b2169d
+		  
+		  notepad.objects.filter(filename = "5169a590-8870-11e4-a825-d2944b2169df").order_by('-created').latest()
+		  
+		  c5bb97e4-8875-11e4-a34d-d2944b2169df
+		  
+		  
+		  
+{% extends 'baap.html' %}
+{% block content %}
+    <h4>New kuchh</h4>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}
