@@ -17,7 +17,8 @@ import uuid
 from login.models import *
 import os
 from subprocess import call
-import subprocess 
+import subprocess
+from subprocess import Popen, PIPE, STDOUT
 
 
 @csrf_protect
@@ -72,6 +73,9 @@ def search(request):
 def creates(request):
     return HttpResponse(uuid.uuid1())
 
+def changelist(request):
+    return HttpResponse(uuid.uuid1())
+
 def create_new(request):
     guid = uuid.uuid1();
     to_url=str("http://127.0.0.1:8000/edit/"+str(guid)+"/");
@@ -117,6 +121,21 @@ def edit_code(request,file_name):
 
         #ans = subprocess.check_output( [ 'python' , file_path ] );
 
-        output= subprocess.check_output( [ 'python' , file_path ] );
+        cmd = 'ls /etc/fstab /etc/non-existent-file'
+        p = Popen(cmd, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT)
+        output = p.stdout.read()
+
+#print output
+
+        #output = "compile error";
+        """
+        temp = subprocess.check_output( [ 'python' , file_path ] , stdout=subprocess.PIPE )
+        output = temp.communicate()[0]
+
+        try:
+            output= subprocess.check_output( [ 'python' , file_path ] , stdout=subprocess.PIPE );
+        except subprocess.CalledProcessError as e:
+            output = e.output;
+        """
         
         return render(request, 'registration/create_new.html' ,{'form': form , 'output':output} )            
