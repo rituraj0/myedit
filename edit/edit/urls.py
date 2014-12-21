@@ -13,7 +13,7 @@ urlpatterns = patterns('',
     url(r'^logout/$', logout_page),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'), # If user is not login it will redirect to login page
     url(r'^register/$', register),
-    url(r'^register/success/$', register_success),
+    url(r'^register/register/success/$', register_success),
     url(r'^home/$', home),
     url(r'^search-form/$', search_form),
     url(r'^search/$', search),
