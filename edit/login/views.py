@@ -15,6 +15,9 @@ from datetime import datetime
 import calendar
 import uuid
 from login.models import *
+import os
+from subprocess import call
+import subprocess 
 
 
 @csrf_protect
@@ -101,5 +104,18 @@ def edit_code(request,file_name):
         ret = notepad.objects.filter(filename = file_name).order_by('-created').latest();
         form = Postnotepad();
         form = Postnotepad(instance=ret)
-        output="compile output here ";
+        source_code= ret.content;
+
+        file_name= ret.version+".py";
+        #file_name.replace(r'\\\\',r'\\');
+        file_path = os.path.join( "C:/Users/Rituraj/Documents/GitHub/myedit", file_name);
+        #C:\Users\Rituraj\Documents\GitHub\myedit
+        #file_path.replace('\\\\','\\');
+        open_file = open( file_path,"w");
+        open_file.write(str(source_code));
+        open_file.close();
+
+        #ans = subprocess.check_output( [ 'python' , file_path ] );
+
+        output= file_path;
         return render(request, 'registration/create_new.html' ,{'form': form , 'output':output} )            
