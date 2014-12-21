@@ -101,4 +101,5 @@ def edit_code(request,file_name):
         ret = notepad.objects.filter(filename = file_name).order_by('-created').latest();
         form = Postnotepad();
         form = Postnotepad(instance=ret)
-        return render(request, 'registration/create_new.html' ,{'form': form} )            
+        output="compile output here ";
+        return render(request, 'registration/create_new.html' ,{'form': form , 'output':output} )            

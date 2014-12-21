@@ -13,8 +13,15 @@
              <h4>Hello Here </h4>
                <form method="POST" class="post-form">{% csrf_token %}
                  {{ form.as_p }}
-                <button type="submit" class="save btn btn-default">Save</button>
+                <button type="submit" class="save btn btn-default">Compile</button>
                </form>
+			   
+			   <br>
+			   <br>
+			   <br>
+			   <textarea rows="10" cols="100">
+                 {{ output }}
+               </textarea>
             </div>
         </div>
     </div>
