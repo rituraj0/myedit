@@ -104,7 +104,6 @@ def edit_code(request,file_name):
 
 
         ret = notepad.objects.filter(filename = file_name).order_by('-created').latest();
-        form = Postnotepad();
         form = Postnotepad(instance=ret)
         source_code= ret.content;
 
@@ -119,8 +118,9 @@ def edit_code(request,file_name):
         p = Popen(cmd, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT)
         output = p.stdout.read()
 
+        changelist = "http://127.0.0.1:8000/changelist/"+str(ret.filename);
       
-        return render(request, 'registration/create_new.html' ,{'form': form , 'output':output} )            
+        return render(request, 'registration/create_new.html' ,{'form': form , 'output':output ,'changelist':changelist} )            
 
 def changelist(request,file_name):
     ret = list(notepad.objects.filter(filename = file_name).order_by('-created'));
