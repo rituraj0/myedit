@@ -73,8 +73,8 @@ def search(request):
 def creates(request):
     return HttpResponse(uuid.uuid1())
 
-def changelist(request):
-    return HttpResponse(uuid.uuid1())
+def changelist(request,file_name):
+    return HttpResponse(file_name)
 
 def create_new(request):
     guid = uuid.uuid1();
@@ -121,11 +121,11 @@ def edit_code(request,file_name):
 
         #ans = subprocess.check_output( [ 'python' , file_path ] );
 
-        cmd = 'ls /etc/fstab /etc/non-existent-file'
+        cmd = "python "+ file_path;
         p = Popen(cmd, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT)
         output = p.stdout.read()
 
-#print output
+        #print output
 
         #output = "compile error";
         """
